@@ -50,7 +50,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8 w-full max-w-5xl mx-auto">
+    <main style={{ minHeight: '100vh', padding: '2rem', maxWidth: '1024px', width: '100%', margin: '0 auto', display: 'block' }}>
       <div className="flex flex-col items-center mb-12">
         <h1 className="text-4xl font-bold mb-2 flex items-center gap-3 text-primary">
           <Package size={36} /> 1688 Browser System
