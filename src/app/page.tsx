@@ -13,6 +13,8 @@ export default function Home() {
   const [searchHistory, setSearchHistory] = useState<any[]>([]);
   const [activeItemId, setActiveItemId] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  // Map of item_id -> currently selected main image URL
+  const [selectedImgs, setSelectedImgs] = useState<{ [key: string]: string }>({});
 
   const rightColumnRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -164,7 +166,7 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: '100vh', padding: '3rem 2rem', maxWidth: '1400px', width: '100%', margin: '0 auto', display: 'block' }}>
-      <div className="flex flex-col items-center mb-24">
+      <div className="flex flex-col items-center mb-36">
         <h1 className="text-5xl font-bold mb-4 flex items-center gap-4 text-primary">
           <Package size={48} /> 1688 Browser System
         </h1>
@@ -248,25 +250,33 @@ export default function Home() {
                     {productData.main_imgs && productData.main_imgs.length > 0 ? (
                       <div className="flex flex-col gap-4">
                         <img 
-                          src={productData.main_imgs[0]} 
+                          src={selectedImgs[productData.item_id] ?? productData.main_imgs[0]} 
                           alt="Main Product Image" 
                           referrerPolicy="no-referrer"
-                          className="w-full aspect-square object-cover rounded-3xl border border-slate-700 shadow-lg"
+                          className="w-full aspect-square object-cover rounded-2xl border border-slate-700 shadow-lg transition-all duration-300"
                         />
-                        <div className="grid grid-cols-4 gap-3">
-                          {productData.main_imgs.slice(1, 5).map((img: string, i: number) => (
-                            <img 
-                              key={i} 
-                              src={img} 
-                              alt={`Thumbnail ${i+1}`} 
-                              referrerPolicy="no-referrer"
-                              className="w-full aspect-square object-cover rounded-xl border border-slate-700 opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
-                            />
-                          ))}
+                        <div className="grid grid-cols-5 gap-2">
+                          {productData.main_imgs.slice(0, 5).map((img: string, i: number) => {
+                            const isSelected = (selectedImgs[productData.item_id] ?? productData.main_imgs[0]) === img;
+                            return (
+                              <img 
+                                key={i} 
+                                src={img} 
+                                alt={`Thumbnail ${i+1}`} 
+                                referrerPolicy="no-referrer"
+                                onClick={() => setSelectedImgs(prev => ({ ...prev, [productData.item_id]: img }))}
+                                className={`w-full aspect-square object-cover rounded-lg border cursor-pointer transition-all duration-200 ${
+                                  isSelected
+                                    ? 'border-blue-500 opacity-100 ring-2 ring-blue-500/50 scale-105'
+                                    : 'border-slate-700 opacity-60 hover:opacity-100 hover:border-slate-500'
+                                }`}
+                              />
+                            );
+                          })}
                         </div>
                       </div>
                     ) : (
-                      <div className="w-full aspect-square rounded-3xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-500">
+                      <div className="w-full aspect-square rounded-2xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center text-slate-500">
                         <ImageIcon size={64} className="mb-4 opacity-50" />
                         <span className="text-xl">No Images</span>
                       </div>
@@ -288,7 +298,7 @@ export default function Home() {
                     </div>
 
                     {/* Pricing Block */}
-                    <div className="bg-slate-800/60 rounded-3xl p-8 mb-8 border border-slate-700">
+                    <div className="bg-slate-800/60 rounded-xl p-8 mb-8 border border-slate-700">
                       <div className="text-base text-slate-400 mb-2 font-medium">Price ({productData.currency})</div>
                       <div className="text-5xl font-bold text-green-400 flex items-center gap-1">
                         <DollarSign size={40} />
@@ -303,7 +313,7 @@ export default function Home() {
                           <div className="text-sm text-slate-400 mb-4 uppercase font-bold tracking-wider">Wholesale Tiers</div>
                           <div className="flex gap-4 overflow-x-auto pb-2 custom-scrollbar">
                             {productData.tiered_price_info.prices.map((tier: any, i: number) => (
-                              <div key={i} className="bg-slate-900/80 rounded-2xl border border-slate-700 p-4 min-w-[130px] text-center shadow-inner">
+                              <div key={i} className="bg-slate-900/80 rounded-xl border border-slate-700 p-4 min-w-[130px] text-center shadow-inner">
                                 <div className="text-sm text-slate-400 mb-2">≥ {tier.beginAmount} {productData.offer_unit}</div>
                                 <div className="text-xl font-bold text-green-400">¥{tier.price}</div>
                               </div>
@@ -315,11 +325,11 @@ export default function Home() {
 
                     {/* Shop Info & Stats */}
                     <div className="grid grid-cols-2 gap-6 mb-8">
-                      <div className="bg-slate-800/40 p-6 rounded-3xl border border-slate-700/50">
+                      <div className="bg-slate-800/40 p-6 rounded-xl border border-slate-700/50">
                         <div className="text-sm text-slate-400 mb-2 font-medium">Total Sales (90 days)</div>
                         <div className="text-3xl font-bold text-white">{productData.sale_info?.sale_quantity_90days || 0}</div>
                       </div>
-                      <div className="bg-slate-800/40 p-6 rounded-3xl border border-slate-700/50">
+                      <div className="bg-slate-800/40 p-6 rounded-xl border border-slate-700/50">
                         <div className="text-sm text-slate-400 mb-2 font-medium">Available Stock</div>
                         <div className="text-3xl font-bold text-white">{productData.stock || 0}</div>
                       </div>
@@ -328,7 +338,7 @@ export default function Home() {
                     {productData.shop_info && (
                       <div className="mt-auto pt-6 border-t border-slate-800">
                         <div className="text-sm text-slate-400 mb-3 font-medium">Supplier</div>
-                        <div className="flex items-center justify-between bg-slate-800/30 p-5 rounded-2xl border border-slate-700/30">
+                        <div className="flex items-center justify-between bg-slate-800/30 p-5 rounded-xl border border-slate-700/30">
                           <span className="text-lg font-semibold text-slate-200 flex items-center gap-3">
                             <Store size={22} className="text-slate-400"/>
                             {productData.shop_info.shop_name}
