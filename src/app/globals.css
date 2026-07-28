@@ -1,24 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  --background: #0f172a;
-  --foreground: #e2e8f0;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --text-secondary: rgba(255, 255, 255, 0.6);
+  --background: #0f0f10;
+  --foreground: #ededef;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --border-color: #27272a;
+  --text-secondary: #a1a1aa;
+  --bg-card: #202024;
   --danger: #ef4444;
   --success: #10b981;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 input, button {
