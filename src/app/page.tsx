@@ -166,7 +166,7 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: '100vh', padding: '3rem 2rem', maxWidth: '1400px', width: '100%', margin: '0 auto', display: 'block' }}>
-      <div className="flex flex-col items-center" style={{ marginBottom: '10rem' }}>
+      <div className="flex flex-col items-center" style={{ marginBottom: '5rem' }}>
         <h1 className="text-5xl font-bold mb-4 flex items-center gap-4 text-primary">
           <Package size={48} /> 1688 Browser System
         </h1>
@@ -239,9 +239,10 @@ export default function Home() {
                 ref={(el) => {
                   itemRefs.current[productData.item_id] = el;
                 }}
-                className={`bg-slate-900/50 border rounded-[2rem] p-12 lg:p-14 transition-colors duration-500 scroll-mt-10 ${
+                className={`bg-slate-900/50 border rounded-[2rem] transition-colors duration-500 scroll-mt-10 ${
                   activeItemId === productData.item_id ? 'border-slate-500 shadow-xl' : 'border-slate-700'
                 }`}
+                style={{ padding: '3rem' }}
               >
                 <div className="flex flex-col xl:flex-row gap-14">
                   
@@ -298,7 +299,7 @@ export default function Home() {
                     </div>
 
                     {/* Pricing Block */}
-                    <div className="bg-slate-800/60 rounded-xl p-8 mb-8 border border-slate-700">
+                    <div className="bg-slate-800/60 rounded-xl border border-slate-700" style={{ padding: '2rem', marginBottom: '2rem' }}>
                       <div className="text-base text-slate-400 mb-2 font-medium">Price ({productData.currency})</div>
                       <div className="text-5xl font-bold text-green-400 flex items-center gap-1">
                         <DollarSign size={40} />
@@ -324,12 +325,12 @@ export default function Home() {
                     </div>
 
                     {/* Shop Info & Stats */}
-                    <div className="grid grid-cols-2 gap-6 mb-8">
-                      <div className="bg-slate-800/40 p-6 rounded-xl border border-slate-700/50">
+                    <div className="grid grid-cols-2 gap-4" style={{ marginBottom: '2rem' }}>
+                      <div className="bg-slate-800/40 rounded-xl border border-slate-700/50" style={{ padding: '1.5rem' }}>
                         <div className="text-sm text-slate-400 mb-2 font-medium">Total Sales (90 days)</div>
                         <div className="text-3xl font-bold text-white">{productData.sale_info?.sale_quantity_90days || 0}</div>
                       </div>
-                      <div className="bg-slate-800/40 p-6 rounded-xl border border-slate-700/50">
+                      <div className="bg-slate-800/40 rounded-xl border border-slate-700/50" style={{ padding: '1.5rem' }}>
                         <div className="text-sm text-slate-400 mb-2 font-medium">Available Stock</div>
                         <div className="text-3xl font-bold text-white">{productData.stock || 0}</div>
                       </div>
@@ -338,7 +339,7 @@ export default function Home() {
                     {productData.shop_info && (
                       <div className="mt-auto pt-6 border-t border-slate-800">
                         <div className="text-sm text-slate-400 mb-3 font-medium">Supplier</div>
-                        <div className="flex items-center justify-between bg-slate-800/30 p-5 rounded-xl border border-slate-700/30">
+                        <div className="flex items-center justify-between bg-slate-800/30 rounded-xl border border-slate-700/30" style={{ padding: '1.25rem 1.5rem' }}>
                           <span className="text-lg font-semibold text-slate-200 flex items-center gap-3">
                             <Store size={22} className="text-slate-400"/>
                             {productData.shop_info.shop_name}
@@ -371,8 +372,8 @@ export default function Home() {
                               const val = prop[key];
                               return (
                                 <div key={i} className={`flex border-b border-slate-700/30 last:border-0 ${i % 2 === 0 ? 'bg-slate-800/40' : 'bg-transparent'}`}>
-                                  <div className="w-1/3 p-5 px-7 text-sm font-semibold text-slate-400 border-r border-slate-700/30">{key}</div>
-                                  <div className="w-2/3 p-5 px-7 text-sm font-medium text-slate-200">{val}</div>
+                                  <div className="w-1/3 text-sm font-semibold text-slate-400 border-r border-slate-700/30" style={{ padding: '1rem 1.5rem' }}>{key}</div>
+                                  <div className="w-2/3 text-sm font-medium text-slate-200" style={{ padding: '1rem 1.5rem' }}>{val}</div>
                                 </div>
                               );
                             })}
@@ -386,11 +387,11 @@ export default function Home() {
                           <h4 className="text-lg font-bold text-slate-400 mb-6 uppercase tracking-wider">Variations</h4>
                           <div className="flex flex-col gap-8">
                             {productData.sku_props.map((sp: any, i: number) => (
-                              <div key={i} className="bg-slate-800/20 p-6 rounded-xl border border-slate-700/30">
+                              <div key={i} className="bg-slate-800/20 rounded-xl border border-slate-700/30" style={{ padding: '1.5rem' }}>
                                 <div className="text-lg font-semibold text-slate-300 mb-5">{sp.prop_name}:</div>
                                 <div className="flex flex-wrap gap-3">
                                   {sp.values.map((v: any, j: number) => (
-                                    <div key={j} className="flex items-center gap-3 bg-slate-800 border border-slate-700 hover:border-slate-500 rounded-2xl p-2.5 pr-5 text-sm text-slate-200 shadow-sm transition-colors">
+                                    <div key={j} className="flex items-center gap-3 bg-slate-800 border border-slate-700 hover:border-slate-500 rounded-2xl text-sm text-slate-200 shadow-sm transition-colors" style={{ padding: '0.75rem 1.25rem' }}>
                                       {v.imageUrl ? (
                                         <img src={v.imageUrl} alt={v.name} referrerPolicy="no-referrer" className="w-10 h-10 rounded-xl object-cover" />
                                       ) : (
