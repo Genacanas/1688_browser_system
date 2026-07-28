@@ -164,7 +164,7 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: '100vh', padding: '3rem 2rem', maxWidth: '1400px', width: '100%', margin: '0 auto', display: 'block' }}>
-      <div className="flex flex-col items-center mb-16">
+      <div className="flex flex-col items-center mb-24">
         <h1 className="text-5xl font-bold mb-4 flex items-center gap-4 text-primary">
           <Package size={48} /> 1688 Browser System
         </h1>
@@ -238,7 +238,7 @@ export default function Home() {
                   itemRefs.current[productData.item_id] = el;
                 }}
                 className={`bg-slate-900/50 border rounded-[2rem] p-8 lg:p-10 transition-colors duration-500 scroll-mt-10 ${
-                  activeItemId === productData.item_id ? 'border-slate-600 shadow-xl' : 'border-slate-800/80 opacity-60'
+                  activeItemId === productData.item_id ? 'border-slate-500 shadow-xl' : 'border-slate-700'
                 }`}
               >
                 <div className="flex flex-col xl:flex-row gap-10">
