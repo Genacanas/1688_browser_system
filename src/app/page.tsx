@@ -242,7 +242,7 @@ export default function Home() {
                 className={`bg-slate-900/50 border rounded-[2rem] transition-colors duration-500 scroll-mt-10 ${
                   activeItemId === productData.item_id ? 'border-slate-500 shadow-xl' : 'border-slate-700'
                 }`}
-                style={{ padding: '3rem' }}
+                style={{ padding: '1.5rem' }}
               >
                 <div className="flex flex-col xl:flex-row gap-14">
                   
