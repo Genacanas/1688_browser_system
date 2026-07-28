@@ -359,21 +359,21 @@ export default function Home() {
                 {/* SKUs and Properties Tabs (Simplified) */}
                 {(productData.sku_props || productData.product_props) && (
                   <div className="mt-16 pt-10 border-t border-slate-800">
-                    <h3 className="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-5">Product Details</h3>
+                    <h3 className="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-5"> Product Details</h3>
                     
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
                       {/* Props */}
                       {productData.product_props && productData.product_props.length > 0 && (
                         <div>
-                          <h4 className="text-lg font-bold text-slate-400 mb-6 uppercase tracking-wider">Specifications</h4>
+                          <h4 className="text-lg font-bold text-slate-400 mb-6 uppercase tracking-wider"> Specifications</h4>
                           <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl overflow-hidden">
                             {productData.product_props.map((prop: any, i: number) => {
                               const key = Object.keys(prop)[0];
-                              const val = prop[key];
+                              const val = typeof prop[key] === 'string' ? prop[key].replace(/;/g, '; ') : prop[key];
                               return (
                                 <div key={i} className={`flex border-b border-slate-700/30 last:border-0 ${i % 2 === 0 ? 'bg-slate-800/40' : 'bg-transparent'}`}>
-                                  <div className="w-1/3 text-sm font-semibold text-slate-400 border-r border-slate-700/30" style={{ padding: '1rem 1.5rem' }}>{key}</div>
-                                  <div className="w-2/3 text-sm font-medium text-slate-200" style={{ padding: '1rem 1.5rem' }}>{val}</div>
+                                  <div className="w-1/3 text-sm font-semibold text-slate-400 border-r border-slate-700/30" style={{ padding: '1rem 1.5rem', wordBreak: 'break-word' }}>{key}</div>
+                                  <div className="w-2/3 text-sm font-medium text-slate-200" style={{ padding: '1rem 1.5rem', wordBreak: 'break-word', overflowWrap: 'anywhere' }}>{val}</div>
                                 </div>
                               );
                             })}
