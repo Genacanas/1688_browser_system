@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ url, language: 'zh' }),
+      body: JSON.stringify({ url, language: 'en' }),
     });
     
     const data = await res.json();

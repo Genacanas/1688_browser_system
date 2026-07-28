@@ -50,7 +50,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8 max-w-5xl mx-auto">
+    <main className="min-h-screen p-8 w-full max-w-5xl mx-auto">
       <div className="flex flex-col items-center mb-12">
         <h1 className="text-4xl font-bold mb-2 flex items-center gap-3 text-primary">
           <Package size={36} /> 1688 Browser System
@@ -96,6 +96,7 @@ export default function Home() {
                     <img 
                       src={productData.main_imgs[0]} 
                       alt="Main Product Image" 
+                      referrerPolicy="no-referrer"
                       className="w-full aspect-square object-cover rounded-xl border border-slate-700 shadow-lg"
                     />
                     <div className="grid grid-cols-4 gap-2">
@@ -104,6 +105,7 @@ export default function Home() {
                           key={i} 
                           src={img} 
                           alt={`Thumbnail ${i+1}`} 
+                          referrerPolicy="no-referrer"
                           className="w-full aspect-square object-cover rounded-md border border-slate-700 opacity-80 hover:opacity-100 transition-opacity cursor-pointer"
                         />
                       ))}
@@ -223,7 +225,7 @@ export default function Home() {
                               {sp.values.map((v: any, j: number) => (
                                 <div key={j} className="flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-lg p-2 pr-3 text-sm text-slate-300">
                                   {v.imageUrl && (
-                                    <img src={v.imageUrl} alt={v.name} className="w-6 h-6 rounded object-cover" />
+                                    <img src={v.imageUrl} alt={v.name} referrerPolicy="no-referrer" className="w-6 h-6 rounded object-cover" />
                                   )}
                                   <span>{v.name}</span>
                                 </div>

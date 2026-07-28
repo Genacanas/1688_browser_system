@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const res = await fetch(`http://api.tmapi.top/1688/item_detail?apiToken=${token}&item_id=${id}&language=zh`, {
+    const res = await fetch(`http://api.tmapi.top/1688/item_detail?apiToken=${token}&item_id=${id}&language=en`, {
       method: 'GET',
     });
     const data = await res.json();
