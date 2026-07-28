@@ -166,7 +166,7 @@ export default function Home() {
 
   return (
     <main style={{ minHeight: '100vh', padding: '3rem 2rem', maxWidth: '1400px', width: '100%', margin: '0 auto', display: 'block' }}>
-      <div className="flex flex-col items-center mb-36">
+      <div className="flex flex-col items-center" style={{ marginBottom: '10rem' }}>
         <h1 className="text-5xl font-bold mb-4 flex items-center gap-4 text-primary">
           <Package size={48} /> 1688 Browser System
         </h1>
@@ -239,11 +239,11 @@ export default function Home() {
                 ref={(el) => {
                   itemRefs.current[productData.item_id] = el;
                 }}
-                className={`bg-slate-900/50 border rounded-[2rem] p-8 lg:p-10 transition-colors duration-500 scroll-mt-10 ${
+                className={`bg-slate-900/50 border rounded-[2rem] p-12 lg:p-14 transition-colors duration-500 scroll-mt-10 ${
                   activeItemId === productData.item_id ? 'border-slate-500 shadow-xl' : 'border-slate-700'
                 }`}
               >
-                <div className="flex flex-col xl:flex-row gap-10">
+                <div className="flex flex-col xl:flex-row gap-14">
                   
                   {/* Image Gallery */}
                   <div className="w-full xl:w-2/5 flex-shrink-0">
@@ -371,8 +371,8 @@ export default function Home() {
                               const val = prop[key];
                               return (
                                 <div key={i} className={`flex border-b border-slate-700/30 last:border-0 ${i % 2 === 0 ? 'bg-slate-800/40' : 'bg-transparent'}`}>
-                                  <div className="w-1/3 p-5 text-sm font-semibold text-slate-400 border-r border-slate-700/30">{key}</div>
-                                  <div className="w-2/3 p-5 text-sm font-medium text-slate-200">{val}</div>
+                                  <div className="w-1/3 p-5 px-7 text-sm font-semibold text-slate-400 border-r border-slate-700/30">{key}</div>
+                                  <div className="w-2/3 p-5 px-7 text-sm font-medium text-slate-200">{val}</div>
                                 </div>
                               );
                             })}
