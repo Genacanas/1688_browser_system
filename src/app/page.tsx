@@ -355,7 +355,7 @@ export default function Home() {
                       {productData.product_props && productData.product_props.length > 0 && (
                         <div>
                           <h4 className="text-lg font-bold text-slate-400 mb-6 uppercase tracking-wider">Specifications</h4>
-                          <div className="bg-slate-800/30 border border-slate-700/50 rounded-3xl overflow-hidden">
+                          <div className="bg-slate-800/30 border border-slate-700/50 rounded-xl overflow-hidden">
                             {productData.product_props.map((prop: any, i: number) => {
                               const key = Object.keys(prop)[0];
                               const val = prop[key];
@@ -376,7 +376,7 @@ export default function Home() {
                           <h4 className="text-lg font-bold text-slate-400 mb-6 uppercase tracking-wider">Variations</h4>
                           <div className="flex flex-col gap-8">
                             {productData.sku_props.map((sp: any, i: number) => (
-                              <div key={i} className="bg-slate-800/20 p-6 rounded-3xl border border-slate-700/30">
+                              <div key={i} className="bg-slate-800/20 p-6 rounded-xl border border-slate-700/30">
                                 <div className="text-lg font-semibold text-slate-300 mb-5">{sp.prop_name}:</div>
                                 <div className="flex flex-wrap gap-3">
                                   {sp.values.map((v: any, j: number) => (
