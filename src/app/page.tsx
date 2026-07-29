@@ -228,12 +228,12 @@ export default function Home() {
     <main style={{ minHeight: '100vh', padding: '3rem 2rem', maxWidth: '1400px', width: '100%', margin: '0 auto', display: 'block' }}>
       
       <div className="flex flex-col items-center" style={{ marginBottom: '2rem' }}>
-        <h1 className="text-5xl font-bold mb-4 flex items-center gap-4 text-primary">
+        <h1 className="text-5xl font-bold flex items-center gap-4 text-primary" style={{ marginBottom: '3rem' }}>
           <Package size={48} /> 1688 Browser System
         </h1>
         
         {/* TABS */}
-        <div className="flex justify-center mt-6 mb-14 gap-8 w-full max-w-2xl">
+        <div className="flex justify-center gap-8 w-full max-w-2xl">
           <button 
             onClick={() => setActiveTab('id')}
             className={`flex-1 py-4 rounded-2xl font-bold transition-all duration-300 text-lg border-2 ${
