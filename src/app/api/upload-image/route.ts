@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { put } from '@vercel/blob';
+import { put, del } from '@vercel/blob';
 
 export async function POST(request: Request) {
   try {
@@ -15,9 +15,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'TMAPI token not configured' }, { status: 500 });
     }
 
-    // 1. Upload to Vercel Blob
-    // Needs BLOB_READ_WRITE_TOKEN in .env
-    const blob = await put(file.name, file, { access: 'public' });
+    // 1. Upload to Vercel Blob with random suffix to avoid collisions
+    const blob = await put(file.name, file, { access: 'public', addRandomSuffix: true });
 
     // 2. Convert URL via TMAPI
     const convertRes = await fetch(`http://api.tmapi.top/1688/tools/image/convert_url?apiToken=${token}`, {
@@ -36,6 +35,13 @@ export async function POST(request: Request) {
         error: 'Error converting image in TMAPI', 
         details: convertData 
       }, { status: 500 });
+    }
+
+    // 3. Delete the temporary blob to save Vercel storage limits
+    try {
+      await del(blob.url);
+    } catch (e) {
+      console.error("Failed to delete temp blob:", e);
     }
 
     return NextResponse.json({ 
