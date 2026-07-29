@@ -204,6 +204,18 @@ export default function Home() {
   const handleImageResultClick = (itemId: string) => {
     setActiveTab('id');
     setQuery(itemId);
+    
+    // Check if it's already in history
+    const existingIndex = searchHistory.findIndex(item => item.item_id === itemId);
+    if (existingIndex !== -1) {
+        const item = searchHistory[existingIndex];
+        const newHistory = [item, ...searchHistory.filter((_, i) => i !== existingIndex)];
+        setSearchHistory(newHistory);
+        setTimeout(() => scrollToItem(item.item_id), 100);
+        return;
+    }
+    
+    // If not in history, fetch from API
     performIdSearch(itemId);
   };
 
