@@ -99,11 +99,12 @@ export default function Home() {
   };
 
   
-  const performIdSearch = async (q: string) => {
+  const performIdSearch = async (rawQ: string | number) => {
+    const q = String(rawQ);
     setLoading(true);
     setError(null);
-    const isUrl = q.startsWith('http') || q.includes('1688.com');
     try {
+      const isUrl = q.startsWith('http') || q.includes('1688.com');
       let res;
       if (isUrl) {
         res = await fetch('/api/product/url', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: q }) });
@@ -201,12 +202,13 @@ export default function Home() {
     fetchImagePage(currentAliUrl, nextPage);
   };
 
-  const handleImageResultClick = (itemId: string) => {
+  const handleImageResultClick = (itemId: string | number) => {
+    const idStr = String(itemId);
     setActiveTab('id');
-    setQuery(itemId);
+    setQuery(idStr);
     
     // Check if it's already in history
-    const existingIndex = searchHistory.findIndex(item => item.item_id === itemId);
+    const existingIndex = searchHistory.findIndex(item => String(item.item_id) === idStr);
     if (existingIndex !== -1) {
         const item = searchHistory[existingIndex];
         const newHistory = [item, ...searchHistory.filter((_, i) => i !== existingIndex)];
@@ -216,7 +218,7 @@ export default function Home() {
     }
     
     // If not in history, fetch from API
-    performIdSearch(itemId);
+    performIdSearch(idStr);
   };
 
 
