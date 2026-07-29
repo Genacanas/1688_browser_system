@@ -233,18 +233,26 @@ export default function Home() {
         </h1>
         
         {/* TABS */}
-        <div className="flex justify-center mb-8 gap-4 bg-slate-900/50 p-2 rounded-2xl border border-slate-700">
+        <div className="flex justify-center mt-6 mb-14 gap-8 w-full max-w-2xl">
           <button 
             onClick={() => setActiveTab('id')}
-            className={`px-8 py-3 rounded-xl font-bold transition-all ${activeTab === 'id' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+            className={`flex-1 py-4 rounded-2xl font-bold transition-all duration-300 text-lg border-2 ${
+              activeTab === 'id' 
+                ? 'bg-blue-600 border-blue-400 text-white shadow-[0_0_25px_rgba(37,99,235,0.5)] scale-105' 
+                : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:border-blue-500/50 hover:text-blue-300'
+            }`}
           >
             Search by ID / URL
           </button>
           <button 
             onClick={() => setActiveTab('image')}
-            className={`px-8 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'image' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
+            className={`flex-1 py-4 rounded-2xl font-bold transition-all duration-300 text-lg border-2 flex items-center justify-center gap-3 ${
+              activeTab === 'image' 
+                ? 'bg-emerald-600 border-emerald-400 text-white shadow-[0_0_25px_rgba(16,185,129,0.5)] scale-105' 
+                : 'bg-slate-900/80 border-slate-700 text-slate-400 hover:border-emerald-500/50 hover:text-emerald-300'
+            }`}
           >
-            <UploadCloud size={20}/> Search by Image
+            <UploadCloud size={24}/> Search by Image
           </button>
         </div>
       </div>
